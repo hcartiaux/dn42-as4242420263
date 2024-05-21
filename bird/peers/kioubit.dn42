@@ -1,0 +1,4 @@
+protocol bgp kioubit_v6 from dnpeers {
+        neighbor fe80::ade0 as 4242423914;
+        interface "wg-peer-kioubit";
+}
