@@ -1,8 +1,8 @@
 CURDIR=$(shell pwd)
 ID=$(shell whoami)
 
-.PHONY: all bird sysctl.d wireguard roa
-all: bird sysctl.d wireguard roa
+.PHONY: all bird sysctl.d wireguard roa net
+all: bird sysctl.d wireguard roa net
 
 bird:
 	sudo rsync --delete -av --exclude 'roa*' /etc/$@/. $(CURDIR)/$@/.
@@ -21,3 +21,6 @@ wireguard:
 	sudo rsync --delete -av --include='*.conf' --exclude='*' /etc/$@/. $(CURDIR)/$@/.
 	sudo chown -R $(ID): $(CURDIR)/$@/.
 	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(CURDIR)/$@/*.conf
+
+net:
+	sudo cp /etc/netplan/99-dn42.yaml $(CURDIR)/$@/$(shell hostname)_99-dn42.yaml
