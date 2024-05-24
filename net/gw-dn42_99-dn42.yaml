@@ -1,6 +1,0 @@
-network:
-    bridges:
-        dn42-br0:
-            addresses:
-            - 172.22.144.161/32
-            - fd28:7515:7d51::1/128
