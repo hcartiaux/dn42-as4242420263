@@ -1,6 +1,14 @@
 DN42 - AS4242420263 configuration
 =================================
 
+# Makefile
+
+Use it to backup a pop router configuration
+
+```
+make all
+```
+
 # Wireguard
 
 ```
