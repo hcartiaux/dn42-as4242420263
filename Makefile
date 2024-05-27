@@ -1,30 +1,30 @@
-CURDIR=$(shell pwd)
-ID=$(shell whoami)
 HOSTNAME=$(shell hostname)
+DEST=$(shell pwd)/$(HOSTNAME)
+ID=$(shell whoami)
 .PHONY: all bird sysctl.d wireguard roa net
 all: bird sysctl.d wireguard roa net
 
 bird:
-	sudo rsync --delete -av --exclude 'roa*' /etc/$@/. $(CURDIR)/$@/.
-	sudo chown -R $(ID): $(CURDIR)/$@/.
+	sudo rsync --delete -av --exclude 'roa*' /etc/$@/. $(DEST)/$@/.
+	sudo chown -R $(ID): $(DEST)/$@/.
 
 roa:
-	sudo cp /usr/local/bin/dn42-roa-update.sh $(CURDIR)/$@/.
-	sudo cp /usr/local/bin/dn42-roa-update.sh $(CURDIR)/$@/.
-	sudo cp /etc/systemd/system/dn42-roa.*    $(CURDIR)/$@/.
-	sudo chown -R $(ID): $(CURDIR)/$@/.
+	sudo cp /usr/local/bin/dn42-roa-update.sh $(DEST)/$@/.
+	sudo cp /usr/local/bin/dn42-roa-update.sh $(DEST)/$@/.
+	sudo cp /etc/systemd/system/dn42-roa.*    $(DEST)/$@/.
+	sudo chown -R $(ID): $(DEST)/$@/.
 
 sysctl.d:
-	sudo rsync --delete -av --exclude='README.sysctl' --exclude '99-sysctl.conf' /etc/$@/. $(CURDIR)/$@/.
-	sudo chown -R $(ID): $(CURDIR)/$@/.
+	sudo rsync --delete -av --exclude='README.sysctl' --exclude '99-sysctl.conf' /etc/$@/. $(DEST)/$@/.
+	sudo chown -R $(ID): $(DEST)/$@/.
 
 wireguard:
-	sudo rsync --delete -av --include='*.conf' --exclude='*' /etc/$@/. $(CURDIR)/$@/.
-	sudo chown -R $(ID): $(CURDIR)/$@/.
-	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(CURDIR)/$@/*.conf
+	sudo rsync --delete -av --include='*.conf' --exclude='*' /etc/$@/. $(DEST)/$@/.
+	sudo chown -R $(ID): $(DEST)/$@/.
+	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(DEST)/$@/*.conf
 
 net:
-	mkdir -p  $(CURDIR)/$@/$(HOSTNAME)
-	sudo rsync -av --exclude='50-cloud-init.yaml' /etc/netplan/. $(CURDIR)/$@/$(HOSTNAME)/.
-	sudo cp /etc/systemd/resolved.conf $(CURDIR)/$@/$(HOSTNAME)/
-	sudo chown -R $(ID): $(CURDIR)/$@/.
+	mkdir -p  $(DEST)/$@/$(HOSTNAME)
+	sudo rsync -av --exclude='50-cloud-init.yaml' /etc/netplan/. $(DEST)/$@/.
+	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/
+	sudo chown -R $(ID): $(DEST)/$@/.
