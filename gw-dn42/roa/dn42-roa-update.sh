@@ -2,8 +2,11 @@
 roa4URL="https://dn42.burble.com/roa/dn42_roa_bird2_4.conf"
 roa6URL="https://dn42.burble.com/roa/dn42_roa_bird2_6.conf"
 
-roa4FILE="/etc/bird/roa/roa_dn42.conf"
-roa6FILE="/etc/bird/roa/roa_dn42_v6.conf"
+dirname="/etc/bird/roa"
+roa4FILE="${dirname}/roa_dn42.conf"
+roa6FILE="${dirname}/roa_dn42_v6.conf"
+
+mkdir -p "${dirname}"
 
 cp "${roa4FILE}" "${roa4FILE}.old"
 cp "${roa6FILE}" "${roa6FILE}.old"

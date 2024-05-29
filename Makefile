@@ -6,7 +6,7 @@ all: bird sysctl.d wireguard roa net
 
 bird:
 	mkdir -p $(DEST)/$@
-	sudo rsync --delete -av --exclude 'roa*' /etc/$@/. $(DEST)/$@/.
+	sudo rsync --delete -av --include 'roa.conf' --exclude 'roa*' /etc/$@/. $(DEST)/$@/.
 	sudo chown -R $(ID): $(DEST)/$@/.
 
 roa:
