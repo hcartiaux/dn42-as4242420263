@@ -1,0 +1,6 @@
+[Unit]
+Description=Update DN42 ROA
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/dn42-roa-update.sh
