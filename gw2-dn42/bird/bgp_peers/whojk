@@ -1,0 +1,18 @@
+define WHOJK_LATENCY = 3; # latency in [7.3ms, 20ms]
+
+protocol bgp whojk_v6 from dnpeers {
+    neighbor fe80::2717 as 4242422717;
+    interface "wg-peer-whojk";
+
+    ipv4 {
+        import where dn42_import_filter(WHOJK_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(WHOJK_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(WHOJK_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(WHOJK_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
