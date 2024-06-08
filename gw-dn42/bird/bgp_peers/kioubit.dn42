@@ -7,10 +7,12 @@ protocol bgp kioubit_v6 from dnpeers {
     ipv4 {
         import where dn42_import_filter(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
         export where dn42_export_filter(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
     };
 
     ipv6 {
         import where dn42_import_filter_v6(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
         export where dn42_export_filter_v6(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
     };
 }
