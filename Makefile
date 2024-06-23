@@ -33,3 +33,6 @@ net:
 	sudo rsync -av --exclude='50-cloud-init.yaml' /etc/netplan/. $(DEST)/$@/.
 	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/
 	sudo chown -R $(ID): $(DEST)/$@/.
+
+librenms:
+	scp librenms-dn42.nbsdn:/opt/librenms/html/plugins/Weathermap/configs/dn42-as4242420263.conf librenms-phpweathermap-dn42-as4242420263.conf
