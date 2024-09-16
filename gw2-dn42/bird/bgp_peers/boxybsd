@@ -1,0 +1,18 @@
+define BOXYBSD_LATENCY = 3; # latency in [7.3ms, 20ms]
+
+protocol bgp boxybsd_v6 from dnpeers {
+    neighbor fe80::10 as 4242423588;
+    interface "wg-peer-boxybsd";
+
+    ipv4 {
+        import where dn42_import_filter(BOXYBSD_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(BOXYBSD_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(BOXYBSD_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(BOXYBSD_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
