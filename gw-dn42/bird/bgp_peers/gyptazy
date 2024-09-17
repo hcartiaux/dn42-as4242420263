@@ -1,4 +1,4 @@
-define GYPTAZY_LATENCY = 3; # latency in [7.3ms, 20ms]
+define GYPTAZY_LATENCY = 4; # latency in [20ms, 55ms]
 
 protocol bgp gyptazy_v6 from dnpeers {
     neighbor fe80::49 as 4242421344;
