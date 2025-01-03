@@ -1,34 +1,20 @@
 DN42 - AS4242420263 configuration
 =================================
 
+This repository contains is organized as follows:
+
+* in `common`, common configuration files for all pop routers
+* in `servers`, backup of each server specific configuration files (bird variables and peering sessions, wireguard configuration files)
+* in `resources`: yed diagram and network weathermap configuration file
+
+For general information about AS, refer to the [AS4242420263 home page](https://hcartiaux.github.io/dn42/).  
+For technical information about these configuration files, refer to [my blog posts tagged `dn42`](https://hcartiaux.github.io/tags/dn42/).
+
 # Makefile
 
-Use it to backup a pop router configuration
+Use it to backup a pop router specific configuration
 
 ```
 make all
 ```
 
-# Wireguard
-
-```
-apt install wireguard
-cd /etc/wireguard/
-umask 077; wg genkey | tee privatekey | wg pubkey > publickey
-```
-
-# Bird
-
-```
-apt install bird2
-```
-
-# ROA set-up
-
-```
-systemctl enable --now dn42-roa.timer
-
-systemctl list-timers
-NEXT                         LEFT          LAST                         PASSED        UNIT                         ACTIVATES
-Mon 2024-05-20 23:38:26 CEST 46s left      Mon 2024-05-20 23:23:26 CEST 14min ago     dn42-roa.timer               dn42-roa.service
-```
