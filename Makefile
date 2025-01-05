@@ -14,3 +14,9 @@ wireguard:
 	sudo rsync --delete -av --include='*.conf' --exclude='*' /etc/$@/. $(DEST)/$@/.
 	sudo chown -R $(ID): $(DEST)/$@/.
 	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(DEST)/$@/*.conf
+
+net:
+	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/
+	sudo rsync --delete -av --exclude='resolved.conf' /etc/netplan/. $(DEST)/$@/.
+
+
