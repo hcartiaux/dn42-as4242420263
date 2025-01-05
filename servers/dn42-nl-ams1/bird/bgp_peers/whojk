@@ -1,4 +1,4 @@
-define WHOJK_LATENCY = 3; # latency in [7.3ms, 20ms]
+define WHOJK_LATENCY = 1; # latency in [0ms, 2.7ms] 
 
 /* 
 https://net.whojk.com/

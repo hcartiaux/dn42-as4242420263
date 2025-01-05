@@ -1,4 +1,4 @@
-define KIOUBIT_LATENCY = 2; # latency in [2.7ms, 7.3ms]
+define KIOUBIT_LATENCY = 3; # latency in [7.3ms, 20ms]
 
 protocol bgp kioubit_v6 from dnpeers {
     neighbor fe80::ade0 as 4242423914;
