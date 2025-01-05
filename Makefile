@@ -1,8 +1,8 @@
 HOSTNAME=$(shell hostname)
 DEST=$(shell pwd)/servers/$(HOSTNAME)
 ID=$(shell whoami)
-.PHONY: all bird wireguard
-all: bird wireguard
+.PHONY: all bird wireguard net
+all: bird wireguard net
 
 bird:
 	mkdir -p $(DEST)/$@
