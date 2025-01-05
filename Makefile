@@ -6,7 +6,7 @@ all: bird wireguard net
 
 bird:
 	mkdir -p $(DEST)/$@
-	sudo rsync --delete -av --include 'variables.conf' --include 'bgp_peers' --exclude '*' /etc/$@/. $(DEST)/$@/.
+	sudo rsync --delete -av --no-links --exclude='roa' /etc/$@/. $(DEST)/$@/.
 	sudo chown -R $(ID): $(DEST)/$@/.
 
 wireguard:
