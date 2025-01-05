@@ -1,5 +1,17 @@
 define WHOJK_LATENCY = 3; # latency in [7.3ms, 20ms]
 
+/* 
+https://net.whojk.com/
+Your PeerID is: 23441
+My info:
+My ASN: AS4242422717
+IPv6 Link local: fe80::2717
+Endpoint Address: nl.vm.whojk.com:23441
+My WG Public Key: cokP4jFBH0TlBD/m3sWCpc9nADLOhzM2+lcjAb3ynFc=
+My Contact: https://t.me/HuJK
+
+*/
+
 protocol bgp whojk_v6 from dnpeers {
     neighbor fe80::2717 as 4242422717;
     interface "wg-peer-whojk";
