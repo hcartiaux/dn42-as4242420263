@@ -1,0 +1,7 @@
+network:
+  ethernets:
+    lo:
+      addresses:
+      - 172.22.144.161/29
+      - fd28:7515:7d51:a::1/64
+  version: 2
