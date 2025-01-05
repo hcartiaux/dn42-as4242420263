@@ -11,7 +11,4 @@ network:
             - 2001:bc8:3feb:100::9/64
             gateway4: 192.168.0.1
             gateway6: 2001:bc8:3feb:100::2
-            nameservers:
-                addresses:
-                - 2001:bc8:3feb:100::2
     version: 2
