@@ -7,7 +7,7 @@ This repository contains is organized as follows:
 * in `servers`, backup of each server specific configuration files (bird variables and peering sessions, wireguard configuration files)
 * in `resources`: yed diagram and network weathermap configuration file
 
-For general information about AS, refer to the [AS4242420263 home page](https://hcartiaux.github.io/dn42/).  
+For general information, refer to the [AS4242420263 home page](https://hcartiaux.github.io/dn42/).  
 For technical information about these configuration files, refer to [my blog posts tagged `dn42`](https://hcartiaux.github.io/tags/dn42/).
 
 # Makefile
