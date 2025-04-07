@@ -2,7 +2,7 @@ HOSTNAME=$(shell hostname)
 DEST=$(shell pwd)/servers/$(HOSTNAME)
 ID=$(shell whoami)
 .PHONY: all bird wireguard net
-all: bird wireguard net
+all: bird wireguard net peeringdb
 
 bird:
 	mkdir -p $(DEST)/$@
@@ -16,7 +16,10 @@ wireguard:
 	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(DEST)/$@/*.conf
 
 net:
+	mkdir -p $(DEST)/$@
 	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/
 	sudo rsync --delete -av --exclude='resolved.conf' /etc/netplan/. $(DEST)/$@/.
 
-
+peeringdb:
+	mkdir -p $(DEST)/$@
+	sudo cp /home/dn42-sshd/peering.db $(DEST)/$@/. || true
