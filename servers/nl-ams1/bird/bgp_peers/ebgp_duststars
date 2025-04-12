@@ -1,6 +1,6 @@
 define DUSTSTARS_LATENCY = 3; # latency in [7.3ms, 20ms]
 
-protocol bgp duststars_v6 from dnpeers {
+protocol bgp duststars_v6 from dnpeers_ipv6_only {
     neighbor fe80::1771 as 4242421771;
     interface "wg-peer-duststa";
 
