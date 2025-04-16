@@ -6,9 +6,9 @@
 network:
     ethernets:
         ens2:
-            addresses:
-            - 2001:bc8:710:c528:dc00:ff:fea5:d269/64
-            routes:
-            -   to: ::/0
-                via: fe80::dc00:ff:fea5:d26a
+            dhcp4: true
+            dhcp6: true
+            match:
+                macaddress: de:00:00:a5:d2:69
+            set-name: ens2
     version: 2
