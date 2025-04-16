@@ -1,4 +1,4 @@
-HOSTNAME=$(shell hostname)
+HOSTNAME=$(shell hostname -s)
 DEST=$(shell pwd)/servers/$(HOSTNAME)
 ID=$(shell whoami)
 .PHONY: all bird wireguard net
@@ -13,7 +13,7 @@ wireguard:
 	mkdir -p $(DEST)/$@
 	sudo rsync --delete -av --include='*.conf' --exclude='*' /etc/$@/. $(DEST)/$@/.
 	sudo chown -R $(ID): $(DEST)/$@/.
-	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(DEST)/$@/*.conf
+	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(DEST)/$@/*.conf || true
 
 net:
 	mkdir -p $(DEST)/$@
