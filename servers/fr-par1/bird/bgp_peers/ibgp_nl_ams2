@@ -1,6 +1,6 @@
 protocol bgp ibgp_nl_ams2 {
     local as OWNAS;
-    neighbor fd28:7515:7d51:c::1 as OWNAS;
+    neighbor fd28:7515:7d51:b::1 as OWNAS;
 
     ipv4 {
         import where source = RTS_BGP && is_valid_network() && !is_self_net();
