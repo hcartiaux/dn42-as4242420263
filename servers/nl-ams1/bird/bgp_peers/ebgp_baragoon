@@ -4,6 +4,12 @@ protocol bgp baragoo_v6 from dnpeers_ipv6_only {
     neighbor fe80::1732 as 4242421732;
     interface "wg-peer-baragoo";
 
+    ipv4 {
+        import where dn42_import_filter(BARAGOON_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(BARAGOON_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
     ipv6 {
         import where dn42_import_filter_v6(BARAGOON_LATENCY, BANDWIDTH, LINKTYPE);
         export where dn42_export_filter_v6(BARAGOON_LATENCY, BANDWIDTH, LINKTYPE);
