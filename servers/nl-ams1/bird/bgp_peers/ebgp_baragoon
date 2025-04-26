@@ -1,6 +1,6 @@
 define BARAGOON_LATENCY = 1; # latency in [0ms, 2.7ms]
 
-protocol bgp baragoo_v6 from dnpeers_ipv6_only {
+protocol bgp baragoo_v6 from dnpeers {
     neighbor fe80::1732 as 4242421732;
     interface "wg-peer-baragoo";
 

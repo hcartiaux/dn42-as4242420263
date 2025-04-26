@@ -1,6 +1,6 @@
 define JLU5_LATENCY = 1; # latency in [0ms, 2.7ms]
 
-protocol bgp jlu5_v6 from dnpeers_ipv6_only {
+protocol bgp jlu5_v6 from dnpeers {
     neighbor fe80::117 as 4242421080;
     interface "wg-peer-jlu5";
 
