@@ -1,0 +1,18 @@
+define LUOYU_LATENCY = 5; # latency in [55ms, 148ms]
+
+protocol bgp luoyu_v6 from dnpeers {
+    neighbor fe80::1999:1 as 4242421999;
+    interface "wg-peer-luoyu";
+
+    ipv4 {
+        import where dn42_import_filter(LUOYU_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(LUOYU_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(LUOYU_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(LUOYU_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
