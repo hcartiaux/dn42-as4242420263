@@ -1,0 +1,18 @@
+define ROUTEDBITS_LATENCY = 1; # latency in [0ms, 2.7ms]
+
+protocol bgp routedbits_v6 from dnpeers {
+    neighbor fe80::207 as 4242420207;
+    interface "wg-peer-routedb";
+
+    ipv4 {
+        import where dn42_import_filter(ROUTEDBITS_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(ROUTEDBITS_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(ROUTEDBITS_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(ROUTEDBITS_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
