@@ -1,0 +1,18 @@
+define IEDON_LATENCY = 3; # latency in [7.3ms, 20ms]
+
+protocol bgp iedon_v6 from dnpeers {
+    neighbor fe80::2189:e9 as 4242422189;
+    interface "wg-peer-iedon";
+
+    ipv4 {
+        import where dn42_import_filter(IEDON_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(IEDON_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(IEDON_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(IEDON_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
