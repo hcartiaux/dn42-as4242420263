@@ -2,7 +2,7 @@ define KIOUBIT_LATENCY = 2; # latency in [2.7ms, 7.3ms]
 
 protocol bgp ebgp_as4242423914_v6 from dnpeers {
     neighbor fe80::ade0 as 4242423914;
-    interface "wg-peer-kioubit";
+    interface "wg-m4242423914";
 
     ipv4 {
         import where dn42_import_filter(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
