@@ -1,0 +1,21 @@
+/* Your PeerID is: 20263 */
+
+define MOE233_LATENCY = 5; # latency in [55ms, 148ms]
+
+protocol bgp ebgp_as4242420253_v6 from dnpeers {
+    neighbor fe80::253 as 4242420253;
+    interface "wg-m4242420253";
+
+    ipv4 {
+        import where dn42_import_filter(MOE233_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(MOE233_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(MOE233_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(MOE233_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
+
