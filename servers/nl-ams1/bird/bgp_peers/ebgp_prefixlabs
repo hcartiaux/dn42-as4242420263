@@ -1,0 +1,18 @@
+define PREFIXLABS_LATENCY = 2; # latency in [2.7ms, 7.3ms]
+
+protocol bgp prefixlabs_v6 from dnpeers {
+    neighbor fe80::1240:1 as 4242421240;
+    interface "wg-peer-prefixl";
+
+    ipv4 {
+        import where dn42_import_filter(PREFIXLABS_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(PREFIXLABS_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(PREFIXLABS_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(PREFIXLABS_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
