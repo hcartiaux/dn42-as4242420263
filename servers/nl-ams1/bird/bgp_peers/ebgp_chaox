@@ -1,4 +1,4 @@
-define CHAOX_LATENCY = 1; # latency in [0ms, 2.7ms] 
+define CHAOX_LATENCY = 1; # latency in [0ms, 2.7ms]
 
 protocol bgp chaox_v6 from dnpeers {
     neighbor fe80::2596:5 as 4242422596;
