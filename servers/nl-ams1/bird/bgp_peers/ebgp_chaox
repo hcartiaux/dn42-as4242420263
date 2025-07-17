@@ -1,0 +1,18 @@
+define CHAOX_LATENCY = 1; # latency in [0ms, 2.7ms] 
+
+protocol bgp chaox_v6 from dnpeers {
+    neighbor fe80::2596:5 as 4242422596;
+    interface "wg-peer-chaox";
+
+    ipv4 {
+        import where dn42_import_filter(CHAOX_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(CHAOX_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(CHAOX_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(CHAOX_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
