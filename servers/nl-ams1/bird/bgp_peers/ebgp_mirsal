@@ -1,0 +1,18 @@
+define MIRSAL_LATENCY = 1;
+
+protocol bgp ebgp_as4242422308_v6 from dnpeers {
+    neighbor fe80::2308 as 4242422308;
+    interface "wg-m4242422308";
+
+    ipv4 {
+        import where dn42_import_filter(MIRSAL_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(MIRSAL_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(MIRSAL_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(MIRSAL_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
