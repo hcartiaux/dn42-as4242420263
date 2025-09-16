@@ -19,11 +19,12 @@ etc:
 	mkdir -p $(DEST)/$@/systemd
 	mkdir -p $(DEST)/$@/netplan
 	mkdir -p $(DEST)/$@/network
-	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/systemd/ 2>/dev/null || true
-	sudo cp /etc/resolv.conf $(DEST)/$@/ 2>/dev/null || true
-	sudo rsync --delete -av /etc/netplan/. $(DEST)/$@/netplan/. 2>/dev/null || true
-	sudo cp /etc/network/interfaces $(DEST)/$@/network/ 2>/dev/null || true
-	sudo rsync --delete -av /etc/network/interfaces.d/. $(DEST)/$@/network/interfaces.d/. 2>/dev/null || true
+	mkdir -p $(DEST)/$@/network.d
+	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/systemd/ || true
+	sudo cp /etc/resolv.conf $(DEST)/$@/ || true
+	sudo rsync --delete -av /etc/netplan/. $(DEST)/$@/netplan/. || true
+	sudo cp /etc/network/interfaces $(DEST)/$@/network/ || true
+	sudo rsync --delete -av /etc/network/interfaces.d/. $(DEST)/$@/network/interfaces.d/. || true
 	sudo chown -R $(ID): $(DEST)/$@/.
 
 peeringdb:
