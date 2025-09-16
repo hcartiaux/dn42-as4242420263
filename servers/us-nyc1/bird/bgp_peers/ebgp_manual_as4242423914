@@ -1,0 +1,18 @@
+define KIOUBIT_LATENCY = 1; # latency in [0ms, 2.7ms]
+
+protocol bgp ebgp_as4242423914_v6 from dnpeers {
+    neighbor fe80::ade0 as 4242423914;
+    interface "wg-m4242423914";
+
+    ipv4 {
+        import where dn42_import_filter(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(KIOUBIT_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
