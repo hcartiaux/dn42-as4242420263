@@ -1,0 +1,5 @@
+#!/bin/bash
+
+hostnamectl set-hostname us-nyc1.flap42.eu
+
+exit $?
