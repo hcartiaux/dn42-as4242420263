@@ -18,8 +18,7 @@ wireguard:
 etc:
 	mkdir -p $(DEST)/$@/systemd
 	mkdir -p $(DEST)/$@/netplan
-	mkdir -p $(DEST)/$@/network
-	mkdir -p $(DEST)/$@/network.d
+	mkdir -p $(DEST)/$@/network/interfaces.d
 	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/systemd/ || true
 	sudo cp /etc/resolv.conf $(DEST)/$@/ || true
 	sudo rsync --delete -av /etc/netplan/. $(DEST)/$@/netplan/. || true
