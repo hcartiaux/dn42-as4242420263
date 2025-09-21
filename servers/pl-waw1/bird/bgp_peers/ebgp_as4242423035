@@ -2,7 +2,7 @@ define AS4242423035_LATENCY = 4;
 
 protocol bgp ebgp_as4242423035_v6 from dnpeers {
     neighbor fe80::3035:131 as 4242423035;
-    interface "wg-m4242423035";
+    interface "wg-as4242423035";
 
     ipv4 {
         import where dn42_import_filter(AS4242423035_LATENCY, BANDWIDTH, LINKTYPE);
