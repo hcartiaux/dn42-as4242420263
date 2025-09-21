@@ -1,0 +1,5 @@
+#!/bin/bash
+
+hostnamectl set-hostname de-fra1.flap42.eu
+
+exit $?

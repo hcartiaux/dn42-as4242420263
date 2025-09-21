@@ -1,0 +1,9 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+
+iface eth0 inet6 static
+	address 2a13:e3c1:400e:d42::cafe/32
+	gateway 2a13:e3c1::1
+
