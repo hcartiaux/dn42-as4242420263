@@ -1,0 +1,18 @@
+protocol bgp ibgp_de_fra1 {
+    local as OWNAS;
+    neighbor fd28:7515:7d51:f::1 as OWNAS;
+
+    ipv4 {
+        import where source = RTS_BGP && is_valid_network() && !is_self_net();
+        export where source = RTS_BGP && is_valid_network() && !is_self_net();
+        next hop self;
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where source = RTS_BGP && is_valid_network_v6() && !is_self_net_v6();
+        export where source = RTS_BGP && is_valid_network_v6() && !is_self_net_v6();
+        next hop self;
+        extended next hop off;
+    };
+}
