@@ -1,5 +1,6 @@
 #!/bin/bash
 
 hostnamectl set-hostname de-fra1.flap42.eu
+echo nameserver ::1 > /etc/resolv.conf
 
 exit $?
