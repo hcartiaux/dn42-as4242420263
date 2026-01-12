@@ -1,0 +1,11 @@
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+
+iface eth0 inet6 static
+	address 2a11:6c7:2600:500:d42::cafe/56
+	gateway 2a11:6c7:2600:500::1
+

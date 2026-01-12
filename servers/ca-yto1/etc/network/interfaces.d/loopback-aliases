@@ -1,0 +1,10 @@
+# Additional addresses for loopback interface
+auto lo:0
+iface lo:0 inet static
+    address 172.22.145.169
+    netmask 255.255.255.252
+
+auto lo:1
+iface lo:1 inet6 static
+    address fd28:7515:7d51:9::1
+    netmask 64
