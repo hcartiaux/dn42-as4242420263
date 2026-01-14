@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flap42 Mesh Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            color: #333;
+            overflow: hidden;
+        }
+
+        #network {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .node {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            filter: drop-shadow(0 0 8px rgba(0, 102, 204, 0.5));
+        }
+
+        .node svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .node-label {
+            position: absolute;
+            transform: translate(-50%, 100%);
+            margin-top: 15px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border: 2px solid #0066cc;
+        }
+
+        .city {
+            font-size: 18px;
+            color: #0066cc;
+        }
+
+        .hostname {
+            font-size: 13px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .link {
+            stroke: #0066cc;
+            stroke-width: 2;
+            opacity: 0.4;
+            stroke-dasharray: 8, 4;
+        }
+
+        .title {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            font-weight: 700;
+            color: #0066cc;
+            z-index: 100;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="network">
+        <div class="title">Flap42 Mesh Network</div>
+        <svg id="links"></svg>
+    </div>
+
+    <script>
+        const nodes = [
+            { city: "Toronto", hostname: "ca-yto1", x: 15, y: 35 },
+            { city: "New York", hostname: "us-nyc1", x: 22, y: 60 },
+            { city: "Paris", hostname: "fr-par1", x: 45, y: 65 },
+            { city: "Amsterdam", hostname: "nl-ams1", x: 45, y: 25 },
+            { city: "Amsterdam", hostname: "nl-ams2", x: 55, y: 25 },
+            { city: "Frankfurt", hostname: "de-fra1", x: 60, y: 50 },
+            { city: "Warsaw", hostname: "pl-waw1", x: 78, y: 38 }
+        ];
+
+        const networkDiv = document.getElementById('network');
+        const svg = document.getElementById('links');
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        // Convert percentage positions to pixels
+        const nodePositions = nodes.map(node => ({
+            ...node,
+            px: (node.x / 100) * width,
+            py: (node.y / 100) * height
+        }));
+
+        // Draw all links first (so they appear behind nodes)
+        let linksHTML = '';
+        for (let i = 0; i < nodePositions.length; i++) {
+            for (let j = i + 1; j < nodePositions.length; j++) {
+                linksHTML += `<line class="link" x1="${nodePositions[i].px}" y1="${nodePositions[i].py}" x2="${nodePositions[j].px}" y2="${nodePositions[j].py}" />`;
+            }
+        }
+        svg.innerHTML = linksHTML;
+
+        // Create nodes with labels
+        nodePositions.forEach((node, index) => {
+            const nodeEl = document.createElement('div');
+            nodeEl.className = 'node';
+            nodeEl.style.left = node.px + 'px';
+            nodeEl.style.top = node.py + 'px';
+
+            // Add Cisco router icon
+            nodeEl.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 41" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+                    <use xlink:href="#A" x=".5" y=".5"/>
+                    <symbol id="A" overflow="visible">
+                        <use xlink:href="#C" stroke="none" fill="#0066cc"/>
+                        <use xlink:href="#C" stroke="#fff" stroke-linejoin="miter" fill="none" stroke-width=".788"/>
+                        <use xlink:href="#D" stroke="none" fill="#0066cc"/>
+                        <use xlink:href="#D" stroke="#fff" stroke-linejoin="miter" fill="none" stroke-width=".788"/>
+                        <path d="M22.448 7.081l2.363 3.544-9.056 1.969 1.969-1.575L3.942 8.656 7.486 5.9l13.388 2.362 1.575-1.181zm12.994 8.662L33.473 12.2l8.269-1.969-1.181 1.575 13.388 2.362-3.15 2.363-13.781-2.363-1.575 1.575zM30.717 5.113l9.056-2.362.394 3.544-2.363-.394-4.331 3.938-4.331-.787 4.331-3.544-2.756-.394zM26.78 19.288l-8.662 1.575-.394-4.331 2.756.787 4.725-4.331 4.331.787-5.119 4.725 2.362.788z" stroke="none"/>
+                    </symbol>
+                    <defs>
+                        <path id="C" d="M58.274 11.419c0 6.3-12.994 11.419-29.137 11.419S0 17.719 0 11.419v16.537c0 6.3 12.994 11.419 29.137 11.419s29.137-5.119 29.137-11.419z"/>
+                        <path id="D" d="M29.137 22.837c16.144 0 29.137-5.119 29.137-11.419S45.281 0 29.137 0 0 5.119 0 11.419s12.994 11.419 29.137 11.419z"/>
+                    </defs>
+                </svg>
+            `;
+
+            const labelEl = document.createElement('div');
+            labelEl.className = 'node-label';
+            labelEl.innerHTML = `
+                <div class="city">${node.city}</div>
+                <div class="hostname">${node.hostname}.flap42.eu</div>
+            `;
+
+            nodeEl.appendChild(labelEl);
+            networkDiv.appendChild(nodeEl);
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            location.reload();
+        });
+    </script>
+</body>
+</html>
