@@ -1,0 +1,18 @@
+define AS4242422452_LATENCY = 9;
+
+protocol bgp ebgp_as4242422452_v6 from dnpeers {
+    neighbor fe80:3263::2:1c as 4242422452;
+    interface "wg-as4242422452";
+
+    ipv4 {
+        import where dn42_import_filter(AS4242422452_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter(AS4242422452_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop on;
+    };
+
+    ipv6 {
+        import where dn42_import_filter_v6(AS4242422452_LATENCY, BANDWIDTH, LINKTYPE);
+        export where dn42_export_filter_v6(AS4242422452_LATENCY, BANDWIDTH, LINKTYPE);
+        extended next hop off;
+    };
+}
