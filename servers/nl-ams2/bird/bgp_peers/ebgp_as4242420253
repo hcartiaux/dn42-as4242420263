@@ -1,4 +1,4 @@
-define AS4242420253_LATENCY = 3;
+define AS4242420253_LATENCY = 1;
 
 protocol bgp ebgp_as4242420253_v6 from dnpeers {
     neighbor fe80::253 as 4242420253;
