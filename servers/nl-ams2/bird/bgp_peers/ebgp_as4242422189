@@ -1,7 +1,7 @@
-define AS4242422189_LATENCY = 3;
+define AS4242422189_LATENCY = 1;
 
 protocol bgp ebgp_as4242422189_v6 from dnpeers {
-    neighbor fe80::2189:122 as 4242422189;
+    neighbor fe80::2189:177 as 4242422189;
     interface "wg-as4242422189";
 
     ipv4 {
