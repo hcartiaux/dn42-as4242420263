@@ -16,12 +16,13 @@ wireguard:
 	sed -i 's/PrivateKey =.*$$/PrivateKey = /g' $(DEST)/$@/*.conf || true
 
 etc:
-	mkdir -p $(DEST)/$@/systemd
+	mkdir -p $(DEST)/$@/systemd/network
 	mkdir -p $(DEST)/$@/netplan
 	mkdir -p $(DEST)/$@/network/interfaces.d
 	sudo cp /etc/rc.local $(DEST)/$@/ || true
 	sudo cp /etc/resolv.conf $(DEST)/$@/ || true
 	sudo cp /etc/systemd/resolved.conf $(DEST)/$@/systemd/ || true
+	sudo rsync --delete -av /etc/systemd/network/. $(DEST)/$@/systemd/network/. || true
 	sudo rsync --delete -av /etc/netplan/. $(DEST)/$@/netplan/. || true
 	sudo cp /etc/network/interfaces $(DEST)/$@/network/ || true
 	sudo rsync --delete -av /etc/network/interfaces.d/. $(DEST)/$@/network/interfaces.d/. || true
