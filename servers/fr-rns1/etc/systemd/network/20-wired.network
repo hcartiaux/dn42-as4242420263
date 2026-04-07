@@ -1,0 +1,8 @@
+[Match]
+Name=ens18
+
+[Network]
+Address=2a00:5884::42:4242:263:1/64
+Gateway=2a00:5884::1
+DNS=2a00:5884::7
+DNS=2a00:5884::9
