@@ -1,5 +1,7 @@
 # Your PeerID is: 23401
 
+/*
+
 define WHOJK_LATENCY = 1; # latency in [0ms, 2.7ms]
 
 protocol bgp whojk_v6 from dnpeers {
@@ -18,3 +20,5 @@ protocol bgp whojk_v6 from dnpeers {
         extended next hop off;
     };
 }
+
+*/
