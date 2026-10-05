@@ -1,7 +1,7 @@
 define AS4242420108_LATENCY = 3;
 
 protocol bgp ebgp_as4242420108_v6 from dnpeers {
-    neighbor fe80:0263::2:38 as 4242420108;
+    neighbor fe80::263:2 as 4242420108;
     interface "wg-as4242420108";
 
     ipv4 {
